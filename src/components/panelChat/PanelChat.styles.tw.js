@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import tw from "tailwind.macro";
 
-export const StyledPanelChatContainer = styled.div`
+export const PanelChatContainer = styled.div`
     ${tw`
         flex
         flex-col

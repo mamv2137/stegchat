@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.35",
+    "@emotion/styled": "^10.0.27",
     "@headlessui/react": "^0.2.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -21,7 +23,8 @@
     "stegcloak": "^1.1.1",
     "styled-components": "^5.0.0",
     "tailwind.macro": "^1.0.0-alpha.10",
-    "tailwindcss": "^1.1.4"
+    "tailwindcss": "^1.1.4",
+    "uuid": "^8.3.1"
   },
   "scripts": {
     "start": "yarn watch:css & react-scripts start",
