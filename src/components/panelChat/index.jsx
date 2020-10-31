@@ -13,9 +13,18 @@ const PanelChat = () => {
     }
     return (
         <PanelChatContainer>
-            <CreateNewChat onClick={panelSwitcher} text={panel ? 'New Chat' : 'Add Contact'}  />
             {
-                panel ? <Chats /> : <Contacts backAction={panelSwitcher} />
+                panel ? (
+                    <>
+                        <CreateNewChat onClick={panelSwitcher} text="New Chat" />
+                        <Chats />
+                    </>
+                ) : (
+                    <>
+                        <CreateNewChat text="Add Contact" />
+                        <Contacts backAction={panelSwitcher} />
+                    </>
+                )
             }
         </PanelChatContainer>
     )
