@@ -6,16 +6,16 @@ import Contacts from './Contacts'
 import { PanelChatContainer } from './PanelChat.styles.tw'
 
 const PanelChat = () => {
-    // All this must came from a context
-    const [panel, setPanel] = useState(false)
-    const togglePanel = () => {
+    //TODO: May be all this must came from a context
+    const [panel, setPanel] = useState(true)
+    const panelSwitcher = () => {
         setPanel(!panel)
     }
     return (
         <PanelChatContainer>
-            <CreateNewChat onClick={togglePanel} text={panel ? 'New Chat' : 'Add Contact'}  />
+            <CreateNewChat onClick={panelSwitcher} text={panel ? 'New Chat' : 'Add Contact'}  />
             {
-                panel ? <Chats /> : <Contacts />
+                panel ? <Chats /> : <Contacts backAction={panelSwitcher} />
             }
         </PanelChatContainer>
     )

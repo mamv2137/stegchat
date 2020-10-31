@@ -6,7 +6,7 @@ export const MainLayout = styled.div`
 `
 
 export const MainContent = styled.div`
-  ${tw`flex`}
+  ${tw`flex flex-1`}
 `
 
 export const AppContainer = styled.div`
@@ -21,7 +21,7 @@ export const AppContainer = styled.div`
   }
 `
 
-export const ChatContainer = styled.div`
+export const MainChatContainer = styled.div`
   ${tw`
     flex
     flex-1 

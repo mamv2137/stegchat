@@ -4,7 +4,7 @@ const PanelConfig = () => {
     return (
         <div className="flex-initial flex flex-col text-gray-700 bg-white p-4 m-2 w-1/5 rounded-3xl cursor-pointer">
             <div className="flex flex-col justify-center items-center">
-              <img className="inline-block object-cover w-24 h-24 rounded-full mb-4 mt-8 border-white border-8 shadow-2xl" src="https://images.pexels.com/photos/2955305/pexels-photo-2955305.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Profile image"/>
+              <img className="inline-block object-cover w-24 h-24 rounded-full mb-4 mt-8 border-white border-8 shadow-2xl" src="https://images.pexels.com/photos/2955305/pexels-photo-2955305.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Profile"/>
               <div className="font-bold py-0 text-black">Zahib Garcia la lacrita</div>
               <div className="font-normal py-0 text-gray-600 text-sm">Una description chiebre</div>
             </div>
