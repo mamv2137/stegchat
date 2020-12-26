@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 import Title from '../../common/Title'
 import Input from '../../common/Inputs/Input'
 import List from '../../List'
+
+import { useContextChat } from '../../../contexts/Chat'
 
 const items = Array.from(
   {
@@ -18,6 +20,24 @@ const items = Array.from(
 );
 
 function Chats() {
+  const [chatItems, setChatItems] = useState([])
+  const [{ chats }] = useContextChat()
+
+  const buildChatsItems = () => {
+    if (chats.length === 0) return chats
+    return chats.map(chat => {
+      return Object.assign({}, chat.contact, {
+        chatId: chat.id,
+        isSelected: chat.isSelected
+      })
+    })
+  }
+  
+  useEffect(() => {
+    const recentChats = buildChatsItems()
+    setChatItems(recentChats)
+  }, [chats])
+
   return (
     <>
       <Title text="Chats" />
@@ -29,8 +49,8 @@ function Chats() {
           placeholder="Search by name..."
         />
       </div>
-      {/**Contacts */}
-      <List items={items} />
+      {/** Recent Chats */}
+      <List items={chatItems} />
     </>
     )
 }

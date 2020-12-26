@@ -4,7 +4,9 @@ import { v4 as uuid } from 'uuid'
 import {
   SEND_MESSAGE,
   SEND_FAKE_MESSAGE,
-  SHOW_HIDDEN_MESSAGE
+  SHOW_HIDDEN_MESSAGE,
+  SET_CHATS,
+  SELECT_CHAT
 } from './types'
 
 const ExampleMessage = {
@@ -16,6 +18,7 @@ const ExampleMessage = {
 }
 
 const INIT_STATE = {
+  chats: [],
   messages: [],
   showHiddenMessages: false,
   loadingMessages: false,
@@ -24,16 +27,44 @@ const INIT_STATE = {
 
 function chatReducer(state, { type, payload }) {
   switch (type) {
-    case SEND_MESSAGE: {
-      const message = Object.assign({}, ExampleMessage, {
-          text: payload.text,
-          userId: 'own',
-          time: moment(),
-          hiddenText: `${payload.text} oculto...`
-      })
+    case SET_CHATS: {
       return {
         ...state,
-        messages: [...state.messages, message]
+        chats: payload.chats
+      }
+    }
+    case SELECT_CHAT: {
+      return {
+        ...state,
+        chats: state.chats.map(chat => {
+          const isSelectedChat = chat.id === payload.chatId
+          return Object.assign({}, chat, {
+            isSelected: isSelectedChat ? true : false
+          })
+        })
+      }
+    }
+    case SEND_MESSAGE: {
+      // const message = Object.assign({}, payload, {
+      //   messageId: uuid(),
+      //   date: moment(),
+      // })
+      const message = {
+        ...payload,
+        messageId: uuid(),
+        date: moment(),
+      } 
+      return {
+        ...state,
+        chats: state.chats.map(chat => {
+          const isSelectedChat = chat.isSelected 
+          if (isSelectedChat) {
+            chat.messages = [...chat.messages, message]
+            return chat
+          } else {
+            return chat
+          }
+        })
       }
     }
     case SEND_FAKE_MESSAGE: {
