@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import tw from "tailwind.macro";
+import tw from "twin.macro";
 
 export const TitleContainer = styled.div`
-    ${tw`
+  ${tw`
         my-6 flex justify-start
     `}
-`
+`;
 
 export const TitleContent = styled.span`
-    ${tw`
+  ${tw`
         text-xl font-bold
     `}
-`
+`;
