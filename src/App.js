@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 
 import SideBar from "./components/Sidebar";
@@ -11,6 +11,8 @@ import {
   MainContent,
 } from "./MainLayout.styles";
 
+import useDarkMode from './hooks/useDarkMode';
+
 import PanelConfig from "./components/PanelConfig";
 import Chat from "./components/Chat";
 
@@ -19,20 +21,14 @@ import { ModalProvider } from "./components/Modal/context";
 import { UserProvider } from "./contexts/User";
 
 function App() {
-  const [enableDarkMode, setEnableDarkMode] = useState(false);
+  const [enableDarkMode] = useDarkMode();
 
   return (
     <ModalProvider>
       <UserProvider>
         <ChatProvider>
-          <MainLayout className={enableDarkMode && "dark"}>
+          <MainLayout enableDarkMode={enableDarkMode}>
             <AppContainer>
-              <button
-                className="dark:bg-white"
-                onClick={() => setEnableDarkMode(!enableDarkMode)}
-              >
-                Hola
-              </button>
               <SideBar />
               <MainContent>
                 <MainChatContainer>
