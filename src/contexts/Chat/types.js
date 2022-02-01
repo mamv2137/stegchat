@@ -1,6 +1,0 @@
-export const SET_CHATS = 'SET_CHATS'
-export const SELECT_CHAT = 'SELECT_CHAT'
-
-export const SEND_MESSAGE = 'SEND_MESSAGE'
-export const SEND_FAKE_MESSAGE = 'SEND_FAKE_MESSAGE'
-export const SHOW_HIDDEN_MESSAGE = 'SHOW_HIDDEN_MESSAGE'
