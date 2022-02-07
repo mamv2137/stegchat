@@ -7,6 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <MoralisProvider
+        initializeOnMount
         appId="Yim1erWtKl7SbSYCgM8JvfZc6e0dDjmuU5rkYcFv"
         serverUrl="https://nupuvx2w9fza.usemoralis.com:2053/server">
         <Component {...pageProps} />
