@@ -5,14 +5,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve": "node server.ts"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.8.3",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@walletconnect/web3-provider": "^1.7.1",
+    "@web3auth/web3auth": "^0.2.4",
+    "cross-env": "^7.0.3",
+    "express": "^4.17.2",
     "framer-motion": "^5.6.0",
+    "gun": "^0.2020.1235",
     "magic-sdk": "^8.0.1",
     "moralis": "^1.2.6",
     "next": "12.0.10",
