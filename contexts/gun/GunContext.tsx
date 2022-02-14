@@ -1,18 +1,21 @@
 import React from 'react';
-import Gun from 'gun';
+import Gun, { SEA } from 'gun';
+import 'gun/sea';
 
 const gun = Gun({ peers: ['https://mvp-gun.herokuapp.com/gun'] });
 
 const GunContext = React.createContext<any>(null);
 
 const GunProvider: React.FC = ({ children }) => {
-  return <GunContext.Provider value={{ gun }}>{children}</GunContext.Provider>;
+  return (
+    <GunContext.Provider value={{ gun, SEA }}>{children}</GunContext.Provider>
+  );
 };
 
 const useGun = () => {
   const context = React.useContext(GunContext);
 
-  return context.gun;
+  return context;
 };
 
 export { GunProvider, useGun };

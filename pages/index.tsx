@@ -26,6 +26,16 @@ const commonBoxIconProps = {
 };
 
 const Home: NextPage = () => {
+  const { SEA } = useGun();
+  const secretWord = 'secret';
+  const pair = async () => {
+    try {
+      const msg = await SEA.encrypt('Ricky yen!', secretWord);
+      console.log(msg, await SEA.decrypt(msg, secretWord));
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <Box>
       <Head>
@@ -40,7 +50,7 @@ const Home: NextPage = () => {
             <RiLandscapeLine color="white" size={25} />
           </Box>
           <VStack justifyContent="space-between" h="full" py={6}>
-            <VStack spacing={8}>
+            <VStack spacing={8} onClick={pair}>
               <Box {...commonBoxIconProps}>
                 <HiOutlineChat {...commonIconProps} />
               </Box>
