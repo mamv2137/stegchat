@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Avatar, Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, VStack } from '@chakra-ui/react';
 import {
   HiOutlineUserGroup,
   HiOutlineChat,
@@ -10,7 +10,7 @@ import {
 import { RiLandscapeLine } from 'react-icons/ri';
 
 import { useGun } from '@/contexts/gun';
-import HCollapse from '@/components/HCollapse/HCollapse';
+import ChatContainer from '@/components/ChatContainer';
 
 const commonIconProps = {
   //gray.400
@@ -27,6 +27,7 @@ const commonBoxIconProps = {
 
 const Home: NextPage = () => {
   const { SEA } = useGun();
+
   const secretWord = 'secret';
   const pair = async () => {
     try {
@@ -36,6 +37,7 @@ const Home: NextPage = () => {
       console.log(err);
     }
   };
+
   return (
     <Box>
       <Head>
@@ -66,17 +68,7 @@ const Home: NextPage = () => {
             </Box>
           </VStack>
         </VStack>
-        <Flex bg="blue.200" w="full" alignItems="flex-start" pt={2}>
-          <HStack mt={5}>
-            <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-            <VStack alignItems="flex-start">
-              <Text fontSize="md">Nombre</Text>
-              <Text fontSize="xs">Address |{`<selected-red>`}` </Text>
-            </VStack>
-          </HStack>
-          <Box>Chat</Box>
-          <Box>Info chat</Box>
-        </Flex>
+        <ChatContainer />
       </Flex>
     </Box>
   );
