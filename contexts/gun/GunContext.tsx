@@ -6,13 +6,15 @@ import { IGunChainReference } from 'gun/types/chain';
 
 import 'gun/sea';
 
-const gun = Gun({ peers: ['https://mvp-gun.herokuapp.com/gun'] });
+const gun = Gun({
+  peers: ['https://stegchat-gun-node.herokuapp.com/gun'],
+});
 
-const gunUser = gun.user().recall({ sessionStorage: true });
+// const gunUser = gun.user().recall({ sessionStorage: true });
 interface IGunContext {
   gun: IGunChainReference<any, any, 'pre_root'>;
   SEA: IGunStaticSEA;
-  gunUser: IGunChainReference;
+  // gunUser: IGunChainReference;
   gunAuthHandler: Dispatch<SetStateAction<boolean>>;
   isGunUserAuthenticated: boolean;
 }
@@ -27,7 +29,6 @@ const GunProvider: React.FC = ({ children }) => {
       value={{
         gun,
         SEA,
-        gunUser,
         gunAuthHandler: setIsLogged,
         isGunUserAuthenticated: isLogged,
       }}>

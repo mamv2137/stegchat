@@ -1,21 +1,29 @@
-import { MoralisProvider } from 'react-moralis';
 import type { AppProps } from 'next/app';
+import { Web3ReactProvider } from '@web3-react/core';
+import { UseWalletProvider } from 'use-wallet';
 import { ChakraProvider } from '@chakra-ui/react';
+import Web3 from 'web3';
 
 import { GunProvider } from '@/contexts/gun';
 
+function getLibrary(provider: any) {
+  console.log('provider', provider);
+  const web3 = new Web3(provider);
+  console.log('web3', web3);
+  return web3;
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider>
-      <MoralisProvider
-        initializeOnMount
-        appId="Yim1erWtKl7SbSYCgM8JvfZc6e0dDjmuU5rkYcFv"
-        serverUrl="https://nupuvx2w9fza.usemoralis.com:2053/server">
-        <GunProvider>
-          <Component {...pageProps} />
-        </GunProvider>
-      </MoralisProvider>
-    </ChakraProvider>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <UseWalletProvider autoConnect>
+        <ChakraProvider>
+          <GunProvider>
+            <Component {...pageProps} />
+          </GunProvider>
+        </ChakraProvider>
+      </UseWalletProvider>
+    </Web3ReactProvider>
   );
 }
 

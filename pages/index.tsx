@@ -7,6 +7,7 @@ import {
   HiOutlineCog,
   HiOutlineLogout,
 } from 'react-icons/hi';
+import { useWallet } from 'use-wallet';
 import { RiLandscapeLine } from 'react-icons/ri';
 
 import { useGun } from '@/contexts/gun';
