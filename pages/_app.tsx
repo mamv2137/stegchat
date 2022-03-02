@@ -7,13 +7,12 @@ import Web3 from 'web3';
 import { GunProvider } from '@/contexts/gun';
 
 function getLibrary(provider: any) {
-  console.log('provider', provider);
   const web3 = new Web3(provider);
-  console.log('web3', web3);
   return web3;
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <UseWalletProvider autoConnect>

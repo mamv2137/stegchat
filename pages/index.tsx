@@ -47,7 +47,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Flex w="full" h="100vh" bg="red.20">
+      <Flex w="full" h="100vh">
         <VStack flexDirection="column" px={2} py={2} boxSizing="border-box">
           <Box bg="blue.500" p={2} mt={5}>
             <RiLandscapeLine color="white" size={25} />

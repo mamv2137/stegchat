@@ -1,163 +1,80 @@
-import { useGun } from '@/contexts/gun';
 import {
   Avatar,
-  Box,
   Flex,
   HStack,
   VStack,
   Text,
-  Button,
+  Divider,
   Input,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useWeb3React } from '@web3-react/core';
-import Web3 from 'web3';
-import { useWallet } from 'use-wallet';
-import { InjectedConnector } from '@web3-react/injected-connector';
+import React from 'react';
+import { AiOutlineSearch } from 'react-icons/ai'
+import { FaEthereum } from "react-icons/fa";
 
-export const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42, 56],
-});
+
+
+import ChatList from '../ChatList';
+import Conversation from '../Conversation';
+
 
 const ChatContainer = () => {
-  const { activate, active, deactivate, account } = useWeb3React();
-  const web3 = new Web3(Web3.givenProvider);
-  const wallet = useWallet();
-  const [hasSignature, setHasSignature] = useState(false);
+  // const { selectedChat } = useChatStore();
 
-  const { register, handleSubmit } = useForm();
-  const [chats, setChats] = useState([]);
-  const { gun } = useGun();
+  // useEffect(async () => {
+  //   const signed = await web3.eth.personal.ecRecover(
+  //     web3.utils.fromUtf8(`StegChat dApp`),
+  //     "0x7ff6cdb5097e7c57e4314c37903126e45a8ae23e591510050bcc9e7c8566566b433f01eab30ae9eed9b13cca5c19a9458ed9a07ca05ae913a3c054718e743a601b"
+  //   );
+  //   console.log(signed)
+  //   // if (account?.length) {
+  //   //   handleSignMessage(account);
+  //   // }
+  // }, [account]);
 
-  const handleLogout = async () => {
-    try {
-      await deactivate();
-      setHasSignature(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleCreateError = (err: string) => {
-    if (err === 'User already created!') {
-      // gunAuthentication(user?.get('ethAddress'), user?.get('username'));
-    }
-
-    if (err === 'User is already being created or authenticated!') {
-      handleLogout();
-    }
-  };
-
-  const generateDataToCurrentUser = () => {
-    gun
-      .get('profile')
-      .put('user?.get(ethAddress)')
-      .put({
-        name: 'Palabra de 3 letras de la persona',
-        contacts: {},
-        chats: {},
-        phone: '',
-        avatar: `https://avatars.dicebear.com/api/croodles/${user?.get(
-          'ethAddress'
-        )}.svg`,
-      });
-  };
-
-  const handleSignMessage = async (acc) => {
-    await web3.eth.personal.sign(
-      web3.utils.fromUtf8(`I am signing my one-time nonce: nonce`),
-      acc,
-      (err, signature) => {
-        if (err) {
-          handleLogout();
-        }
-        setHasSignature(true);
-      }
-    );
-  };
-
-  useEffect(() => {
-    if (account?.length) {
-      handleSignMessage(account);
-    }
-  }, [account]);
-
-  const handleAuth = async () => {
-    try {
-      await activate(injected);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getContacts = () => {
-    // const contacts = gunUser.get('alias').get('contacts');
-    // contacts.once((data) => {
-    //   console.log('first contact', data);
-    // });
-  };
-
-  const getChats = () => {
-    // const chats = gunUser.get('alias').get('chats');
-    // chats.once((data) => {
-    //   if (!Boolean(data)) {
-    //     console.log('no chats');
-    //     setChats([]);
-    //     return;
-    //   }
-    //   console.log('first chats', data);
-    // });
-  };
-
-  const onSubmit = (data) => {
-    // const find = gun.user(data.pub);
-    // find
-    //   .get('alias')
-    //   .get('contacts')
-    //   .once((data) => {
-    //     console.log('find', data);
-    //   });
-  };
-
-  const isAuthenticated = hasSignature && wallet.status === 'connected';
+  const wallet = '0xf859cb539ede394da3892c3b79794cb565682d45';
 
   return (
-    <Flex bg="blue.200" w="full" alignItems="flex-start" pt={2}>
-      <HStack mt={5}>
-        <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-        <VStack alignItems="flex-start">
-          <Text fontSize="md">Nombre</Text>
-          <Text fontSize="xs">
-            Address | {isAuthenticated && wallet.account}
-          </Text>
-        </VStack>
-        {isAuthenticated ? (
-          <VStack>
-            <Button onClick={handleLogout}>Logout</Button>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Input {...register('pub')} />
-              <Button type="submit">Submit</Button>
-            </form>
-            <HStack>
-              <VStack>
-                <Text fontSize="md">Contactos</Text>
-              </VStack>
-              <VStack>
-                <Text fontSize="md">Chat</Text>
-              </VStack>
+    <Flex w="full" alignItems="flex-start">
+      <VStack bg="#FAFAFE" w="lg" h="full" px={4} alignItems="flex-start">
+        <HStack my={5} spacing={5} w="100%">
+          <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+          <VStack alignItems="flex-start" w="100%">
+            <Text fontSize="md" fontWeight="500">
+              Elyon!
+            </Text>
+            <HStack rounded="full" bg="gray.200" p={2}>
+              <FaEthereum />
+              <Text fontSize="xs" color="gray.800">
+                {wallet.slice(0, 6)}...{wallet.slice(39)}
+              </Text>
             </HStack>
           </VStack>
-        ) : (
-          <>
-            <Button onClick={handleAuth}>Login</Button>
-          </>
-        )}
-        <Button onClick={handleLogout}>Just in Case 🔴</Button>
-      </HStack>
-
-      {/* <Box>Chat</Box>
-      <Box>Info chat</Box> */}
+        </HStack>
+        <Divider />
+        <Text as="h2" fontSize="xl" fontWeight="600">
+          Messages
+        </Text>
+        <InputGroup>
+          <InputLeftElement pointerEvents="none">
+            <AiOutlineSearch color="gray.300" />
+          </InputLeftElement>
+          <Input
+            variant="filled"
+            placeholder="Search..."
+            w="100%"
+            bg="#ffffff"
+          />
+        </InputGroup>
+        {/* Contact List */}
+        <ChatList />
+      </VStack>
+      {/* Conversation */}
+      <Conversation />
+      {/* <VStack w="lg" h="full" bg="orange.200">
+        <Text>Info chat</Text>
+      </VStack> */}
     </Flex>
   );
 };
